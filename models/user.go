@@ -13,7 +13,7 @@ type User struct {
 	Username  string             `bson:"username", json:"username"`
 	Password  string             `bson:"password", json:"password"`
 	Email     string             `bson:"email", json:"email"`
-	Birthday  string             `bson:"birthday", json:"birthday"`
+	Birthday  *time.Time         `bson:"birthday", json:"birthday"`
 	Address   string             `bson:"address", json:"address"`
 	Phone     string             `bson:"phone", json:"phone"`
 	IsAvtive  bool               `bson:"isAvtive", json:"isAvtive"`

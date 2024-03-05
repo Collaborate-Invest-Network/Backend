@@ -15,7 +15,7 @@ type MongoInstance struct {
 
 var Mi MongoInstance
 
-const dbName = "mongogram"
+const dbName = "cin"
 const mongoURI = "mongodb://localhost:27017/" + dbName
 
 func ConnectMongo() error {
