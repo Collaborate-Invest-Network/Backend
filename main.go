@@ -1,8 +1,8 @@
 package main
 
 import (
-	"backend/auth"
-	"backend/utils"
+	"backend/database"
+	"backend/internal/router"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -10,14 +10,12 @@ import (
 
 func main() {
 
-	if err := utils.ConnectMongo(); err != nil {
+	if err := database.ConnectMongo(); err != nil {
 		log.Fatal(err)
 	}
 	app := fiber.New()
 
-	authRoute := app.Group("/auth")
-
-	authRoute.Post("/signup", auth.Signup)
+	router.SetupRoute(app)
 
 	app.Listen(":4000")
 }

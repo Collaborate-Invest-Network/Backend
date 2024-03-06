@@ -1,9 +1,10 @@
 package auth
 
 import (
-	"backend/models"
-	"backend/utils"
+	"backend/database"
+	"backend/internal/models"
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -25,7 +26,7 @@ type SignupInfo struct {
 	Birthday  *Birthday `json:"birthday"`
 	Address   string    `json:"address"`
 	Username  string    `json:"username"`
-	//Password  string    `json:"password"`
+	Password  string    `json:"password"`
 }
 
 func Signup(c *fiber.Ctx) error {
@@ -40,8 +41,11 @@ func Signup(c *fiber.Ctx) error {
 		})
 	}
 
+	// Log a status message indicating successful data reception
+	fmt.Println("Received signup data:", signupInfo)
+
 	//users := utils.Mi.Db.Collection("users")
-	userColl := utils.Mi.Db.Collection("users")
+	userColl := database.Mi.Db.Collection("users")
 	user := new(models.User)
 
 	//Check duplicate email

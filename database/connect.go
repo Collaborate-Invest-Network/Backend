@@ -1,4 +1,4 @@
-package utils
+package database
 
 import (
 	"context"
@@ -8,13 +8,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-type MongoInstance struct {
-	Client *mongo.Client
-	Db     *mongo.Database
-}
-
-var Mi MongoInstance
-
 const dbName = "cin"
 const mongoURI = "mongodb://localhost:27017/" + dbName
 
@@ -23,7 +16,7 @@ func ConnectMongo() error {
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 
 	if err != nil {
-		log.Fatal("Error connecting to MongoDB:", err)
+		log.Fatal("Error connecting to mongodb", err)
 	}
 
 	db := client.Database(dbName)
@@ -36,5 +29,4 @@ func ConnectMongo() error {
 	log.Printf("Mongodb connected (%v)", dbName)
 
 	return nil
-
 }
