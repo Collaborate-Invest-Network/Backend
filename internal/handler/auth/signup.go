@@ -67,8 +67,39 @@ func Signup(c *fiber.Ctx) error {
 	}
 
 	//Check duplicate phone
+	if err := userColl.FindOne(context.TODO(), bson.D{{Key: "phone", Value: signupInfo.Phone}}).Decode(user); err != nil {
+		if err != mongo.ErrNoDocuments {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"message": "Verifying phone fail",
+				"data":    signupInfo,
+				"error":   err,
+			})
+		}
+	}
+	if user.Phone != "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "Phone has already been registered",
+			"data":    signupInfo,
+		})
+	}
 
 	//Check duplicate username
+	if err := userColl.FindOne(context.TODO(), bson.D{{Key: "username", Value: signupInfo.Username}}).Decode(user); err != nil {
+		if err != mongo.ErrNoDocuments {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"message": "Verifying username fail",
+				"data":    signupInfo,
+				"error":   err,
+			})
+		}
+	}
+	if user.Username != "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "Username has already been registered",
+			"data":    signupInfo,
+		})
+
+	}
 
 	//parse string time
 	Birthtime := time.Date(signupInfo.Birthday.Year, time.Month(signupInfo.Birthday.Month), signupInfo.Birthday.Day, 0, 0, 0, 0, time.UTC)
