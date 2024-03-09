@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
@@ -15,7 +16,14 @@ func main() {
 	}
 	app := fiber.New()
 
+	app.Use(cors.New())
+
 	router.SetupRoute(app)
 
-	app.Listen(":4000")
+	//app.Listen(":4000")
+
+	// Start the Fiber app on port 4000
+	if err := app.Listen(":4000"); err != nil {
+		log.Fatal(err)
+	}
 }
