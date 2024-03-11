@@ -16,7 +16,7 @@ type User struct {
 	Birthday  time.Time          `bson:"birthday", json:"birthday"`
 	Address   string             `bson:"address", json:"address"`
 	Phone     string             `bson:"phone", json:"phone"`
-	IsAvtive  bool               `bson:"isAvtive", json:"isAvtive"`
+	IsActive  bool               `bson:"isAvtive", json:"isActive"`
 	CreatedAt time.Time          `bson:"createdAt", json:"createdAt"`
 	UpdatedAt time.Time          `bson:"updatedAt", json:"updatedAt"`
 }
