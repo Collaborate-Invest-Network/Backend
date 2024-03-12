@@ -2,6 +2,8 @@ package router
 
 import (
 	"backend/internal/handler/auth"
+	"backend/internal/handler/user"
+	"backend/internal/middlewares"
 
 	"github.com/gofiber/fiber/v2"
 )
